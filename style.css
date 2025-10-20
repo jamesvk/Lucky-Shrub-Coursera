@@ -1,0 +1,162 @@
+*, *::before, *::after {    
+  box-sizing: border-box;   
+}                           
+/* box-sizing by default is set to content-box which means the width and the 
+height you set apply only to the content box - padding and borders are added
+added on top, making the total box bigger. border-box includes the padding and border
+inside making calculations easier. The before and after are for pseudo elements so that 
+nothing is missed*/
+
+html, body {
+    height: 100%; /* height needs to be added b/c min-height does not make a parent 
+                  height definite */
+    min-height: 100dvh;
+    margin: 0;
+}
+
+.main-container {
+    height: 100%;
+    min-height: calc(100% - 2rem);
+    padding-block: 1rem;  /* top margin of the first child collapses with the parent's top edge.
+                        so I changed the padding instead to give some cushion at the top. padding-block
+                        is padding-top/bottom. -inline is for left/right. Can use for example 
+                        padding-inline:. */
+    padding-inline: 2%; 
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    block-size: clamp(88px, 10%, 140px); /*block-size is the same as height. Clamp() combines
+                                           min, preferred, max height values into a single
+                                           responsive expression. Same as height: 10%; 
+                                           min-height: 88px, but also added a max value;*/
+}
+
+#logo {
+    height: 100%;
+    width: auto;
+    display: block; /* makes the image a block element instead of an inline element like
+                     text which has a small gap below for descenders("g" or "y" */
+    margin-inline: auto; /* centers the image. Didn't use text-align for header b/c
+                        display-box for #logo made the image a block element instead of 
+                        an inline element */
+    object-fit: contain; /* the height and width settings keep the image from stretching
+                         out of shape, but doesn't tell the browser what to do if the
+                         image's proportions don't match the container's shape. Object-fit:contain scales 
+                         the image so the whole image is visible, even if it leaves empty space (fits inside) */
+}
+
+nav {
+    block-size: clamp(35.2px, 4%, 56px);
+    display: grid; /* replacing display flex: and flex-direction and justify content.
+                   Without display, the ul container went back to the normal block
+                   flow so the first child sits at the top by default (child top touches
+                   container parent top */
+    place-items: center; /* centers the child containers */
+}
+
+ul {
+    width: 100%; /* the ul container isn't as wide as the parent nav container so without
+                 this the justify-content won't work */
+    list-style-type: none;
+    display: flex;
+    flex-flow: row wrap; /*flex-direction: row; flex-wrap: wrap;*/
+    justify-content: space-evenly;
+    margin: 0; /* to make sure the content stays in the center even if the font size changes */
+    padding: 0; /* to make sure the content stays in the center even if the font size changes */
+}
+/* For mobile
+@media (max-width: 700px) {
+    ul {
+        flex-direction: column;
+        
+    }
+}
+*/
+main {
+    flex: 1 1 auto; /* shorthand for flex-grow, flex-shrink and flex-basis. flex-grow: 1 says
+                    "if there's extra space in the flex container, let this element grow to fill it".
+                    flex-shrink says "if there's not enough space, allow this element to shrink." So
+                    when the viewport becomes shorter, main can shrink before causing the layout
+                    to overflow. flex-basis sets the element's starting size before any growing or 
+                    shrinking happens. Auto means it looks at the element's natural size or any set 
+                    height we set.*/
+    min-height: 0; /* Very important for vertical layouts. By default, flex items have min-height
+                    auto which means the browser won't let them shrink small than their content.
+                    This allows main to shrink smaller than the content if needed */
+    overflow: hidden;
+}
+
+.carousel {
+    position:relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.carousel > input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.carousel_viewport {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel_track {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 400ms ease;
+}
+
+.carousel_slide {
+    width:100%;
+    overflow: hidden;
+    padding: 0;
+}
+
+.carousel_slide > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.carousel_dots {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    display: flex;
+    gap: 0.5rem;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.carousel_dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background-color: black;
+  cursor: pointer;
+}
+
+
+#s1:checked ~ .carousel_viewport .carousel_track { 
+    transform: translateX(0%); 
+}
+
+#s2:checked ~ .carousel_viewport .carousel_track { 
+    transform: translateX(-33.333%); 
+}
+
+#s3:checked ~ .carousel_viewport .carousel_track { 
+    transform: translateX(-66.333%); 
+
+}
+footer {
+    height: clamp(24.61px, 4%, 39.15px);
+}
