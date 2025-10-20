@@ -112,7 +112,7 @@ nav ul li a:hover {
 }
 
 
-main {
+main.home-page {
     flex: 1 1 auto; /* flex is a shorthand for flex-grow, flex-shrink, and flex-basis. flex-grow: 1 
                     means “if there’s extra space in the flex container, let this element grow to fill it,” 
                     while flex-shrink means “if there’s not enough space, allow this element to shrink.” 
@@ -204,5 +204,56 @@ main {
 
 }
 footer {
-    height: clamp(24.61px, 4%, 39.15px);
+    block-size: clamp(24.61px, 4%, 39.15px);
+    background-color: rgba(137, 214, 187, 0.65);
+}
+
+
+main.our-story {
+    position: relative;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    grid-template-areas: "founder_img founder_body"
+                         "mission_values_img mission_values_body"
+                         "growth_achievements_img growth_achievements_body";
+    flex: 1 1 auto; 
+    min-height: 0;
+    overflow: hidden;
+}
+
+#founder_img {grid-area: founder_img;}
+#founder_body {grid-area: founder_body;}
+#mission_values_img {grid-area: mission_values_img;}
+#mission_values_body {grid-area: mission_values_body;}
+#growth_achievements_img {grid-area: growth_achievements_img;}
+#growth_achievements_body {grid-area: growth_achievements_body;}
+
+
+.story_img, .story_section {
+    margin: 0;
+    min-height: 100%;
+}
+
+
+.story_img {
+    outline: 2px dotted red;
+    overflow: hidden;
+    display: grid;  
+    place-items: center;
+}
+
+.story_section {
+    margin-left: 0;
+}
+
+h2 {
+    font-family: Garamond;
+    font-size: 14px;
+}
+
+p {
+    font-family: Garamond;
+    font-size: 10px;
 }
