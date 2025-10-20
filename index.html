@@ -20,7 +20,9 @@
     <body>
         <div class="main-container">
             <header>
-                <img id="logo" src="Lucky-Shrub-logos/images/Asset 2@3x.png" alt="Lucky Shrub logo">
+                <a href="index.html">
+                    <img id="logo" src="Lucky-Shrub-logos/images/Asset 2@3x.png" alt="Lucky Shrub logo">
+                </a>
             </header>
             <nav>
                 <ul>
@@ -33,15 +35,16 @@
             <main>
                 <section class="carousel" aria-label="Image carousel">
 
-                    <!-- STATE: Exactly one radio button is checked at a time. 
+                    <!-- State: Exactly one radio button is checked at a time. 
                     We are not using these radio buttons as the dots themselves because 
-                    they are limited in how they can be styled. The provided radio buttons 
+                    they are limited in how they can be styled. We are using them 
+                    for different states/images. The provided radio buttons 
                     will be hidden.-->
                     <input type="radio" name="slide" id="s1" checked>
                     <input type="radio" name="slide" id="s2">
                     <input type="radio" name="slide" id="s3">
 
-                    <!--Carousel Viewport: The window that shows one slide at a time-->
+                    <!-- Carousel Viewport: The window that shows one slide at a time-->
                     <div class="carousel_viewport">
                         <!-- Track: A horizontal strip containing the images below, which we’ll shift using transform. -->
                         <div class="carousel_track">
