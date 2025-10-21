@@ -1,0 +1,47 @@
+/* Reset & base tokens */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+:root {
+    /* Breakpoints */
+    --bp-sm: 520px;
+    --bp-md: 768px;
+    --bp-lg: 1024px;
+
+    /* Colors */
+    /* Brand / Theme */
+    --color-primary: #2A8A7B;      /* Lucky Shrub Teal */
+    --color-primary-light: #58BBA8;/* lighter for hover / accents */
+    --color-primary-dark: #1E6358; /* for headings or dark mode *
+
+    * Neutrals */
+    --color-bg: #FFFFFF;           /* main background */
+    --color-surface: #F5F5F5;      /* cards / sections */
+    --color-border: #DADADA;       /* subtle separators */
+    --color-text: #222222;         /* main text */
+    --color-text-muted: #555555;   /* secondary text */
+
+      /* Accent Palette */
+    --color-accent: #F4A261;       /* warm earthy contrast (orange/tan) */
+    --color-accent-light: #F6C294;
+    --color-accent-dark: #E76F51;
+
+    /* Spacing scale */
+    --space-1: 0.5rem;  /* 8px  */
+    --space-2: 1rem;    /* 16px */
+    --space-3: 1.5rem;  /* 24px */
+    --space-4: 2rem;    /* 32px */
+
+  /* Type scale */
+    --fs-0: 0.875rem;   /* small */
+    --fs-1: 1rem;       /* base  */
+    --fs-2: 1.25rem;    /* h3    */
+    --fs-3: 1.5rem;     /* h2    */
+    --fs-4: 2rem;       /* h1    */
+}
