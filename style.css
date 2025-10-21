@@ -83,16 +83,6 @@ header, footer {
     flex: 0 0 auto;
 }
 
-main {
-    flex: 1 1 auto; /* fills remaining height and can shrink */
-    min-height: 0; /* critical: allows inner grid to shrink if needed */
-    overflow: auto; /* scroll if content taller than viewport. Won't force 
-                    footer below viewport */
-    display: grid;
-}
-
-/* ----------------------------------------------------- */
-/* Mobile version */
 
 header {
     display: flex;
@@ -102,7 +92,6 @@ header {
 }
 
 header a > img {
-    outline: 1.5px green dotted;
     display: block;
     height: 80px;
     width: auto;
@@ -110,7 +99,6 @@ header a > img {
 }
 
 header nav > ul {
-    outline: 1.5px green dotted;
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -122,4 +110,51 @@ header nav > ul {
 header nav ul a {
     text-decoration: none;
     color: var(--color-text);
+    font-size: var(--fs-2);
+}
+
+main {
+    flex: 1 1 auto; /* fills remaining height and can shrink */
+    min-height: 0; /* critical: allows inner grid to shrink if needed */
+    overflow: auto; /* scroll if content taller than viewport. Won't force 
+                    footer below viewport */
+    display: grid;
+    grid-template-columns: 1fr; /* mobile: single column */
+    grid-template-rows: auto; 
+    grid-template-areas: "promo"
+                         "services";
+    gap: var(--space-1);
+
+}
+
+.promo {
+    grid-area: promo;
+    min-height: clamp(200px, 25dvh, 400px);
+    background-image: url("../Lucky-Shrub-logos/Promo_Img.png");
+    background-size: cover; /* fills the box, no overflow; crops as needed */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.promo::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top, bottom, left, right all = 0; this is to fill the full container */
+    background: rgba(0, 0, 0, .25);
+    z-index: 1;
+}
+
+.promo-content {
+    position: relative;
+    z-index: 2;
+    color: var(--color-accent-light);
+}
+
+.services {
+    grid-area: services;
+}
+
+section {
+    outline: 2px dotted green;
 }
