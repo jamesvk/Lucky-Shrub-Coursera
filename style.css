@@ -59,14 +59,6 @@ body {
     background: rgb(0, 0, 0, .01);
 }
 
-/*
-img, svg, video {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
-*/
-
 /* ----------------------------------------------------- */
 header, main, footer {
     max-width: 1100px;
@@ -85,12 +77,10 @@ header, footer {
     flex: 0 0 auto;
 }
 
-
 header {
     display: flex;
     flex-direction: column;
     align-items: stretch; /* ensures full width across */
-    /* gap: var(--space-2); */
     margin: 0;
 }
 
@@ -101,6 +91,10 @@ header a > img {
     margin-inline: auto;
     margin-block: var(--space-1);
 }
+
+/* nav, a[href*="index.html"] {
+    outline: 1.5px red dotted;
+} */
 
 header nav > ul {
     display: flex;
@@ -116,6 +110,8 @@ header nav ul a {
     color: var(--color-text);
     font-size: var(--fs-1);
     font-weight: 450;
+    /* text-shadow: 0 1.5px 2px rgba(0, 0, 0, .55); */
+    /* text-shadow: 0 2px 2px rgba(42, 138, 123, .6); */
     text-shadow: 0 2px 2px rgba(42, 138, 123, .6);
     letter-spacing: .06rem;
     transition: color 450ms ease;
@@ -127,8 +123,8 @@ nav ul li a:hover {
 
 main {
     flex: 1 0 auto; /* grow if there's space, but size to it's content */
-    /* flex: 1 1 auto; fills remaining height and can shrink */
-    /* min-height: 0; critical: allows inner grid to shrink if needed */
+                    /* flex: 1 1 auto; fills remaining height and can shrink */
+                    /* min-height: 0; critical: allows inner grid to shrink if needed */
     display: grid;
     grid-template-columns: 1fr; /* mobile: single column */
     grid-template-rows: auto; 
@@ -136,13 +132,13 @@ main {
                          "services";
     gap: var(--space-1);
     /* overflow: auto; scroll if content taller than viewport. Won't force 
-                    footer below viewport */
+    footer below viewport */
     padding-top: var(--space-1);
 }
 
 .promo {
     grid-area: promo;
-    min-height: clamp(200px, 25dvh, 400px);
+    min-height: 15dvh;
     background-image: url("../Lucky-Shrub-logos/Promo_Img.png");
     background-size: cover; /* fills the box, no overflow; crops as needed */
     background-position: center;
@@ -150,11 +146,10 @@ main {
     position: relative;
     border: .5px solid rgba(0, 0, 0, .6);
     border-radius: var(--space-1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15),
-                0 8px 20px rgba(0, 0, 0, 0.25);
-    padding-inline: var(--space-0);
-    }
-
+    box-shadow: 0 .25px .75px rgba(0, 0, 0, 0.15),
+                0 1px 2.5px rgba(0, 0, 0, 0.25); 
+    padding-block: .25rem;
+}
 
 .promo::before {
     content: "";
@@ -171,19 +166,25 @@ main {
     color: var(--color-primary-lighter);
     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7),
                  0 0 12px rgba(88, 187, 168, 0.6); /* same as #58BBA8 glow */
-    padding: clamp(var(--space-2), 1vw, var(--space-5));
+    padding-inline: clamp(var(--space-2), 1vw, var(--space-5));
     max-width: 60ch;     /* The text container will never be wider than the space taken 
                          by about 60 characters in one line. */
+    margin-block: var( --space-0);
 }
 
 .promo-content h4, .promo-content p {
     margin-block: var( --space-0);
+    font-size: .85rem;
 }
 
+.promo-content h4 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
 
 .promo-content p {
+    font-weight: 400;
     text-align: justify;
-    /* padding-inline: var(--space-1); */
 }
 
 .services {
@@ -200,8 +201,8 @@ main {
     background: var(#F5F5F5);
     border: .5px solid rgba(0, 0, 0, .6);
     border-radius: var(--space-1);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15),
-                0 8px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 .5px 1.5px rgba(0, 0, 0, 0.15),
+                0 2px 5px rgba(0, 0, 0, 0.25);
     text-align: justify;
     padding-bottom: var(--space-1);
     padding-inline: var(--space-1);
@@ -275,3 +276,39 @@ footer {
     padding-left: var(--space-5);
 }
 
+/* ----------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+    header {
+        padding-block: var(--space-0);
+    }
+
+    header nav {
+        border: 1.5px solid var(--color-primary);
+        background-color: rgba(142, 219, 204, 0.10);
+        border-radius: var(--space-0);
+    }
+    
+    header nav > ul {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    main {
+        padding-top: 0;
+    }
+
+    .promo-content {  
+        width: 100%;
+    }
+
+    .promo {
+        min-height: 10dvh;
+    }
+
+    .promo h4, .promo p {
+        font-size: .85rem;
+    }
+}
