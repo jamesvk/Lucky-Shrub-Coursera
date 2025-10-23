@@ -61,10 +61,8 @@ body {
 
 /* ----------------------------------------------------- */
 header, main, footer {
-    max-width: 1100px;
     margin-inline: auto;
     padding: var(--space-2);
-
 }
 
 .home-page {
@@ -82,6 +80,7 @@ header {
     flex-direction: column;
     align-items: stretch; /* ensures full width across */
     margin: 0;
+    padding-block: var(--space-0);
 }
 
 header a > img {
@@ -213,7 +212,7 @@ main {
     overflow: hidden;
     border-radius: var(--space-0);
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
-
+    margin-top: var(--space-0);
 }
 
 .service-media img {
@@ -281,6 +280,7 @@ footer {
 @media (min-width: 768px) {
 
     header {
+        outline: 1.5px dotted red;
         padding-block: var(--space-0);
     }
 
@@ -298,6 +298,7 @@ footer {
 
     main {
         padding-top: 0;
+        outline: 1.5px dotted green;
     }
 
     .promo-content {  
@@ -310,5 +311,41 @@ footer {
 
     .promo h4, .promo p {
         font-size: .85rem;
+    }
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto;
+        gap: var(--space-1);
+    }
+
+    .service {
+        padding-inline: 0;
+    }
+
+    .service:nth-child(3){
+        grid-column: 1 / -1; 
+    }
+
+    .service-media {
+        margin-top: var(--space-0);
+    }
+
+    .service h2 {
+        font-size: var(--fs-2);
+    }
+
+    .service p {
+        font-size: .95rem;
+    }
+} 
+
+@media (min-width: 1024px) {
+    .services {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service:nth-child(3) {
+        grid-column: auto;
     }
 }
