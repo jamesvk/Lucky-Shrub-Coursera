@@ -1,259 +1,348 @@
-*, *::before, *::after {    
-  box-sizing: border-box;   
-}                           
-/* By default, the box-sizing property is set to content-box, which means the 
-width and height you specify apply only to the content area — padding and borders 
-are added on top, making the total box larger. The border-box value includes the 
-padding and border inside the specified width and height, making layout calculations 
-easier. The ::before and ::after pseudo-elements are included so that no elements are missed.*/
+/* ------------- Reset & base tokens --------------*/
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
 html, body {
-    height: 100%; /* Height needs to be added because min-height does not make the parent’s height definite. */
-    min-height: 100dvh; /* Ensures it can grow with the viewport and remain flexible on mobile browsers. 
-                        If you remove min-height, the layout will still work fine in most desktop browsers,
-                        but you might see gaps or scroll issues when the browser UI changes size. */
+    height: 100%;
     margin: 0;
 }
 
-.main-container {
-    height: 100%;
-    min-height: calc(100% - 2rem);
-    padding-block: 1rem;  /* The top margin of the first child collapses with the parent’s top edge in a 
-                          normal block layout flow, so I added padding instead to create some cushion at 
-                          the top and make the content box centered on all sides. padding-block sets the padding 
-                          for the top and bottom, while padding-inline sets it for the left and right 
-                          (for example: padding-inline: ...) */
-    padding-inline: 2%; 
+:root {
+    /* Breakpoints */
+    --bp-sm: 520px;
+    --bp-md: 768px;
+    --bp-lg: 1024px;
+
+    /* Colors */
+    /* Brand / Theme */
+    --color-primary: #2A8A7B;      /* Lucky Shrub Teal */
+    --color-primary-light: #58BBA8;/* lighter for hover / accents */
+    --color-primary-lighter: #8EDBCC;
+    --color-primary-dark: #1E6358; /* for headings or dark mode */
+
+    /* Neutrals */
+    --color-bg: #FFFFFF;           /* main background */
+    --color-surface: #F5F5F5;      /* cards / sections */
+    --color-border: #DADADA;       /* subtle separators */
+    --color-text: #222222;         /* main text */
+    --color-text-muted: #555555;   /* secondary text */
+
+      /* Accent Palette */
+    --color-accent: #F4A261;       /* warm earthy contrast (orange/tan) */
+    --color-accent-light: #F6C294;
+    --color-accent-dark: #E76F51;
+
+    /* Spacing scale */
+    --space-0: .35rem;
+    --space-1: 0.5rem;  /* 8px  */
+    --space-2: 1rem;    /* 16px */
+    --space-3: 1.5rem;  /* 24px */
+    --space-4: 2rem;    /* 32px */
+    --space-5: 3rem;    /* 48px */
+
+    /* Type scale */
+    --fs-0: 0.5rem;     /* small */
+    --fs-1: 1rem;       /* base  */
+    --fs-2: 1.25rem;    /* h3    */
+    --fs-3: 1.5rem;     /* h2    */
+    --fs-4: 2rem;       /* h1    */
+
+    /* Font */
+    --font-body: 'Outfit', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: rgb(0, 0, 0, .01);
+}
+
+/* ----------------------------------------------------- */
+header, main, footer {
+    margin-inline: auto;
+    padding: var(--space-2);
+}
+
+.home-page {
     display: flex;
     flex-direction: column;
-    background-color: #EAF2E9;
+    min-height: 100dvh; /* fill the display viewport height */
 }
 
-header, nav {
-    position: relative;
-    z-index:10;
+header, footer {
+    flex: 0 0 auto;
 }
 
-header{
-    block-size: clamp(88px, 10%, 140px); /* block-size is the same as height. The clamp() function combines 
-                                         minimum, preferred, and maximum height values into a single responsive 
-                                         expression.*/
-    border: .50px solid #89D6BB;
-    background-color: rgba(137, 214, 187, 0.65);
-}
-
-#logo {
-    height: 100%;
-    width: auto;
-    display: block; /* Makes the image a block-level element instead of an inline element like text, which 
-                    normally leaves a small gap below for descenders (such as “g” or “y”).*/
-    margin-inline: auto; /* Centers the image. I didn’t use text-align for the header because setting 
-                         display: block on #logo made the image a block-level element instead of an 
-                         inline element. */
-    padding-block: 2px;
-    object-fit: contain; /* The height and width settings prevent the image from stretching out of shape, but 
-                         they don’t tell the browser what to do if the image’s proportions don’t match the 
-                         container’s shape. object-fit: contain scales the image so the entire image remains 
-                         visible while preserving its aspect ratio, even if this leaves empty space within the 
-                         container.*/
-}
-
-nav {
-    border: .30px solid #89D6BB;
-    background-color: rgba(137, 214, 187, 0.45);
-    block-size: clamp(35.2px, 4%, 56px);
-    display: grid; /* Replacing display: flex, flex-direction and justify-content with a flex grid. Both options 
-                   work, but using a flex grid is cleaner and requires less code. Without display, the <ul> 
-                   container reverts to the normal block flow, so the first child collapses/sits at the top by 
-                   default, with its top edge touching the parent container’s top edge (losing margin). */
-    place-items: center; /* Centers the child containers */
-}
-
-ul {
+header {
     display: flex;
-    flex-flow: row wrap; /* Same as flex-direction: row; flex-wrap: wrap; */
-    width: 100%; /* The <ul> container isn’t as wide as the parent <nav> container, so without this, 
-                 justify-content won’t work. */
-    justify-content: space-evenly;
-    margin: 0; /* To make sure the content stays in the center even if the font size changes */
-    padding: 0; /* To make sure the content stays in the center even if the font size changes */
-    list-style-type: none;
+    flex-direction: column;
+    align-items: stretch; /* ensures full width across */
+    margin: 0;
+    padding-block: .05rem;
 }
 
-@media (max-width: 520px) { /* For Mobile */
-    nav {
-        block-size: clamp(88px, 10%, 140px)
-    }
-
-    ul {
-        display: flex;
-        flex-direction: column;
-    }
-
-    ul li {
-        margin: auto;
-    }
+header a > img {
+    display: block;
+    height: 80px;
+    width: auto;
+    margin-inline: auto;
+    margin-block: var(--space-1);
 }
 
+/* nav, a[href*="index.html"] 
+    outline: 1.5px red dotted;
+} */
 
-nav ul li a {
+header nav > ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+header nav ul a {
     text-decoration: none;
-    color: black;
-    font-family: Garamond;
-    font-size: 14px;
-    text-shadow: .5px .5px 2px grey;
-    transition: transform 450ms ease, color 450ms ease, box-shadow 450ms ease; 
+    color: var(--color-text);
+    font-size: var(--fs-1);
+    font-weight: 450;
+    text-shadow: 0 2px 2px rgba(42, 138, 123, .6);
+    letter-spacing: .06rem;
+    transition: color 450ms ease;
 }
 
 nav ul li a:hover {
-  transform: translate(0, -4px) scale(1.03);
-  z-index: 2;
-  color: #AFA2FC;   
+  color: #AFA2FC; 
 }
 
-
-main.home-page {
-    flex: 1 1 auto; /* flex is a shorthand for flex-grow, flex-shrink, and flex-basis. flex-grow: 1 
-                    means “if there’s extra space in the flex container, let this element grow to fill it,” 
-                    while flex-shrink means “if there’s not enough space, allow this element to shrink.” 
-                    This ensures that when the viewport becomes smaller, the main element can shrink before 
-                    the layout overflows. flex-basis sets the element’s initial size before any growing or 
-                    shrinking occurs, and auto means it uses the element’s natural size or any height or 
-                    width that has been set.*/
-
-    min-height: 0; /* This is very important for vertical layouts. By default, flex items have 
-                   min-height: auto, which means the browser won’t let them shrink smaller than their content. 
-                   Setting a different value allows the main element to shrink below its content if needed. */
-    overflow: hidden;
+main {
+    flex: 1 0 auto; /* grow if there's space, but size to it's content */
+                    /* flex: 1 1 auto; fills remaining height and can shrink */
+                    /* min-height: 0; critical: allows inner grid to shrink if needed */
+    display: grid;
+    grid-template-columns: 1fr; /* mobile: single column */
+    grid-template-rows: auto; 
+    grid-template-areas: "promo"
+                         "services";
+    gap: var(--space-1);
+    /* overflow: auto; scroll if content taller than viewport. Won't force 
+    footer below viewport */
+    padding-top: var(--space-1);
 }
 
-.carousel {
-    border: .40px solid #89D6BB;
-    position:relative; /* The element stays in normal flow, but you can nudge it using top, left, right, or bottom. 
-                       The space it originally occupied is still reserved — other elements don’t move into that space. 
-                       Often used to create a positioning context for absolutely positioned child elements. */
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.carousel > input[type="radio"] {
-    position: absolute;
-    opacity: 0; /* To make the dots invisible. The radio buttons in this scenario serve as separate stages 
-                for the images. */
-    pointer-events: none;
-}
-
-.carousel_viewport {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.promo {
+    grid-area: promo;
+    min-height: 15dvh;
+    background-image: url("../Lucky-Shrub-logos/Promo_Img.png");
+    background-size: cover; /* fills the box, no overflow; crops as needed */
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
+    border: .5px solid rgba(0, 0, 0, .6);
+    border-radius: var(--space-1);
+    box-shadow: 0 .25px .75px rgba(0, 0, 0, 0.15),
+                0 1px 2.5px rgba(0, 0, 0, 0.25); 
+    padding-block: .25rem;
 }
 
-.carousel_track {
-    display: flex;
-    width: 300%;
-    height: 100%;
-    transition: transform 450ms ease; /* The transition property lets you animate changes to CSS properties over time — 
-                                      instead of them happening instantly. The transform property visually manipulates an 
-                                      element in 2D or 3D space — it can move, scale, rotate, or skew elements without affecting 
-                                      surrounding layout flow. */
+.promo::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top, bottom, left, right all = 0; this is to fill the full container */
+    background: rgba(0, 0, 0, .6);
+    z-index: 1;
+    border-radius: var(--space-1);
 }
 
-.carousel_slide {
-    width:100%;
+.promo-content {
+    position: relative;
+    z-index: 2;
+    color: var(--color-primary-lighter);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7),
+                 0 0 12px rgba(88, 187, 168, 0.6); /* same as #58BBA8 glow */
+    padding-inline: clamp(var(--space-2), 1vw, var(--space-5));
+    max-width: 100%;
+    /* max-width: 60ch;  The text container will never be wider than the space taken 
+                         by about 60 characters in one line. */
+    margin-block: var( --space-0);
+}
+
+.promo-content h4, .promo-content p {
+    margin-block: var( --space-0);
+    font-size: .85rem;
+}
+
+.promo-content h4 {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.promo-content p {
+    font-weight: 400;
+    text-align: justify;
+}
+
+.services {
+    grid-area: services;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+}
+
+.service {
+    display: grid;
+    grid-template-rows: auto auto 1fr; /* h2/media/paragraph fills remaining space. 
+                                       The 1fr keeps all cards equal across a row */
+    background: var(#F5F5F5);
+    border: .5px solid rgba(0, 0, 0, .6);
+    border-radius: var(--space-1);
+    box-shadow: 0 .5px 1.5px rgba(0, 0, 0, 0.15),
+                0 2px 5px rgba(0, 0, 0, 0.25);
+    text-align: justify;
+    padding-bottom: var(--space-1);
+    padding-inline: var(--space-1);
+}
+
+.service-media {
+    aspect-ratio: 16/9;
     overflow: hidden;
+    border-radius: var(--space-0);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
+    margin-top: var(--space-0);
+}
+
+.service-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.service h2 {
+    font-size: var(--fs-3);
+    color: var(--color-text);
+    letter-spacing: 0.01rem;
+    margin-top: var(--space-1);
+    margin-bottom: 0;
+    margin-inline: var(--space-2);
+    text-shadow: 0 1px 2px rgba(42, 138, 123, .75);
+}
+
+.service p {
+    color: var(--color-text);
+    padding-inline: var(--space-4);
+    padding-bottom: 0;
+    margin-block: 0;
+    text-align: justify;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.service a {
+    margin-block:0;
+    text-align: right;
+    margin-inline: var(--space-4);
+    padding-inline: var(--space-3);
+    padding-bottom: var(--space-1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .4);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    background-color: var(--color-primary);
+    padding: 0;
+    font-size: var(--fs-0);
+}
+
+.footer-branding img {
+    height: 50px;
+    width: auto;
+    margin-block: 0;
     padding: 0;
 }
 
-.carousel_slide > img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+.footer-copy {
+    padding-right: var(--space-2);
 }
 
-.carousel_dots {
-    position: absolute;
-    display: flex;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    gap: 0.5rem;
-    z-index: 2;
+.footer-copy p {
+    border-top: 1px solid black;
+    padding-left: var(--space-5);
 }
 
-.carousel_dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background-color: black;
-  cursor: pointer;
-}
+/* ----------------------------------------------------- */
 
+@media (min-width: 768px) {
+    body {
+        padding-inline: var(--space-0);
+    }
 
-#s1:checked ~ .carousel_viewport .carousel_track { 
-    transform: translateX(0%); 
-}
+    header {
+        padding-block: var(--space-0);
+    }
 
-#s2:checked ~ .carousel_viewport .carousel_track { 
-    transform: translateX(-33.333%); 
-}
+    header nav {
+        border: 1.5px solid rgba(42, 138, 123, .85);
+        background-color: rgba(142, 219, 204, 0.10);
+        border-radius: var(--space-0);
+        box-shadow: 0 .5px 1px rgba(0, 0, 0, 0.1),
+                    0 2px 4px rgba(0, 0, 0, 0.2); 
+    }
+    
+    header nav > ul {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
 
-#s3:checked ~ .carousel_viewport .carousel_track { 
-    transform: translateX(-66.333%); 
+    main {
+        padding-top: 0;
+    }
 
-}
-footer {
-    block-size: clamp(24.61px, 4%, 39.15px);
-    background-color: rgba(137, 214, 187, 0.65);
-}
+    .promo {
+        min-height: 10dvh;
+    }
 
+    .promo h4, .promo p {
+        font-size: .85rem;
+    }
 
-main.our-story {
-    position: relative;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: repeat(3, minmax(0, 1fr));
-    grid-template-areas: "founder_img founder_body"
-                         "mission_values_img mission_values_body"
-                         "growth_achievements_img growth_achievements_body";
-    flex: 1 1 auto; 
-    min-height: 0;
-    overflow: hidden;
-}
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto auto;
+        gap: var(--space-1);
+    }
 
-#founder_img {grid-area: founder_img;}
-#founder_body {grid-area: founder_body;}
-#mission_values_img {grid-area: mission_values_img;}
-#mission_values_body {grid-area: mission_values_body;}
-#growth_achievements_img {grid-area: growth_achievements_img;}
-#growth_achievements_body {grid-area: growth_achievements_body;}
+    .service {
+        padding-inline: 0;
+    }
 
+    .service:nth-child(3){
+        grid-column: 1 / -1; 
+    }
 
-.story_img, .story_section {
-    margin: 0;
-    min-height: 100%;
-}
+    .service-media {
+        margin-top: var(--space-0);
+    }
 
+    .service h2 {
+        font-size: var(--fs-2);
+    }
 
-.story_img {
-    outline: 2px dotted red;
-    overflow: hidden;
-    display: grid;  
-    place-items: center;
-}
+    .service p {
+        font-size: .95rem;
+    }
+} 
 
-.story_section {
-    margin-left: 0;
-}
+@media (min-width: 1024px) {
+    .services {
+        grid-template-columns: repeat(3, 1fr);
+    }
 
-h2 {
-    font-family: Garamond;
-    font-size: 14px;
-}
-
-p {
-    font-family: Garamond;
-    font-size: 10px;
+    .service:nth-child(3) {
+        grid-column: auto;
+    }
 }

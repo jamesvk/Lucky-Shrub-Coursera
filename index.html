@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="author" content="James K.">
 
-        <meta property="og:title" content="Lucky Shrub | Our Story - Design Creation - Maintenance Landscaping - Plant Nursery">
+        <meta property="og:title" content="Lucky Shrub | Home - Design & Build - Landscape Care - Nursery">
         <meta property="og:description" content="From bespoke garden design to professional landscaping and care — discover our nursery’s curated collection of premium plants and outdoor pieces.">
         <meta property="og:type" content="website">
         <meta property="og:url" content="website (url)">
@@ -14,65 +14,102 @@
         <meta property="og:site_name" content="Lucky Shrub">
 
         <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 
         <title>Lucky Shrub</title>
     </head>
-    <body>
-        <div class="main-container">
-            <header>
-                <a href="index.html">
-                    <img id="logo" src="Lucky-Shrub-logos/images/Asset 2@3x.png" alt="Lucky Shrub logo">
-                </a>
-            </header>
+    <body class="home-page">
+        <header>
+            <a href="index.html">
+                <img src="Lucky-Shrub-logos/Images/Asset 2@3x.png" alt="Lucky Shrub Logo">
+            </a>
             <nav>
                 <ul>
-                    <li><a href="our-story.html">Our Story</a></li>
-                    <li><a href="design-creation.html">Design Creation</a></li>
-                    <li><a href="landscaping-maintenance">Landscaping Maintenance</a></li>
-                    <li><a href="plant-nursery">Plant Nursery</a></li>
+                    <li id="nav1"><a href="index.html">HOME</a></li>
+                    <li id="nav2"><a href="design-and-build.html (not built)">DESIGN & BUILD</a></li>
+                    <li id="nav3"><a href="landscape-care.html (not built)">LANDSCAPE CARE</a></li>
+                    <li id="nav4"><a href="nursery.html (not built)">NURSERY</a></li>
                 </ul>
             </nav>
-            <main class="home-page">
-                <section class="carousel" aria-label="Image carousel">
+        </header>
 
-                    <!-- State: Exactly one radio button is checked at a time. 
-                    We are not using these radio buttons as the dots themselves because 
-                    they are limited in how they can be styled. We are using them 
-                    for different states/images. The provided radio buttons 
-                    will be hidden.-->
-                    <input type="radio" name="slide" id="s1" checked>
-                    <input type="radio" name="slide" id="s2">
-                    <input type="radio" name="slide" id="s3">
+        <main>
+            <!-- Promotional Section -->
+            <section class="promo">
+                <div class="promo-content">
+                    <h4>Free Garden Design Consultation!</h4>
+                    <p>Book your complimentary on-site consultation and explore your garden with 
+                       our design team. Together, we’ll review your space, refine your vision, 
+                       and discuss ways to elevate its beauty and function. Within a week, you’ll 
+                       receive a tailored concept proposal with detailed renderings, plant selections, 
+                       material options, and a projected completion date.</p>
+                </div>
+            </section>
 
-                    <!-- Carousel Viewport: The window that shows one slide at a time-->
-                    <div class="carousel_viewport">
-                        <!-- Track: A horizontal strip containing the images below, which we’ll shift using transform. -->
-                        <div class="carousel_track">
-                            <figure class="carousel_slide"> <!--Figure is a semantic tag is used to group self-contained content - usually things like image-->
-                                <img src="Lucky-Shrub-logos/Homepage_Caro_Img_1.png" alt="Exterior Garden Concept">
-                            </figure>
-                            <figure class="carousel_slide">
-                                <img src="Lucky-Shrub-logos/Homepage_Caro_Img_2.png" alt="Pavilion Garden Concept">
-                            </figure>
-                            <figure class="carousel_slide">
-                                 <img src="Lucky-Shrub-logos/Homepage_Caro_Img_3.png" alt="Backyard Garden Concept">
-                            </figure>
-                        </div>
-                    </div> 
-                    
-                    <!-- Dots: Dot labels that toggle the radios above. Radio sets the stages, the Carousel Viewport sets the viewport, the track and 
-                    the images that represent each track. The Dots link everything together-->
-                    <div class="carousel_dots" role="tablist" aria-label="Choose slide">
-                        <label class="carousel_dot" for="s1" role="tab" aria-controls="s1"></label>
-                        <label class="carousel_dot" for="s2" role="tab" aria-controls="s2"></label>
-                        <label class="carousel_dot" for="s3" role="tab" aria-controls="s3"></label>
-                    </div>
-                </section>
-            </main>
-            <footer>
+            <!-- Services Overview Section-->
+            <section class="services">
 
-            </footer>
-        </div>
-    
+                <!-- Design & Build -->
+                <article class="service design">
+                    <h2>Design & Build</h2>
+                    <figure class="service-media">
+                        <img src="/Lucky-Shrub-logos/Design.png" alt="Design & Build">
+                    </figure>
+                    <p>Jason and Maria believe that great gardens begin with understanding 
+                        how you live and what inspires you. Through an on-site walkthrough, 
+                        they’ll study the character of your space, listen to your ideas, and 
+                        craft a plan that balances beauty with purpose. Every element — from 
+                        plant selection to materials and lighting — is chosen with care to 
+                        complement your lifestyle. They’ll transform any space into an oasis 
+                        you can be proud of.</p>
+                    <a href="design.html (not made for this project)" >Discover More</a>
+                </article>
+
+                <!-- Landscape Care-->
+                <article class="service care">
+                    <h2>Landscape Care</h2>
+                    <figure class="service-media">
+                        <img src="/Lucky-Shrub-logos/Care.png" alt="Landscape Care"> 
+                    </figure>
+                    <p>Our Landscape Care service ensures your garden remains as vibrant and 
+                        refined as the day it was created. Jason and Maria’s dedicated team 
+                        of landscapers provides attentive maintenance throughout the year — 
+                        nurturing healthy growth, shaping elegant forms, and preserving every 
+                        detail of your outdoor retreat.</p>
+                    <a href="landscape.html (not made for this project)">Discover More</a>
+                </article>
+
+                <!-- Nursery-->
+                <article class="service nursery">
+                    <h2>Nursery</h2>
+                    <figure class="service-media">
+                        <img src="/Lucky-Shrub-logos/Nursery.png" alt="Nursery"> 
+                    </figure>   
+                    <p>At the heart of Lucky Shrub is a boutique plant nursery that brings 
+                        the same care and craftsmanship found in every garden we design. 
+                        Stocked with a curated selection of indoor and outdoor plants, our 
+                        nursery ensures each specimen meets the highest standards of health 
+                        and quality. By growing and sourcing our own plants, we maintain 
+                        full control over the beauty, longevity, and sustainability of 
+                        every project — making Lucky Shrub your one-stop destination for 
+                        inspired, lasting greenery.</p>
+                    <a href="nursery.html (not made for this project)" >Discover More</a>
+                </article>
+            </section>    
+
+        </main>
+        <footer>
+            <figure class="footer-branding">
+                <img src="/Lucky-Shrub-logos/Images/Asset 3@3x.png" alt="Lucky Shrub Logo">
+            </figure>
+            <div class="footer-copy">
+                <p>Copyright Lucky Shrub</p>
+            </div>
+        </footer>
     </body>
 </html>
